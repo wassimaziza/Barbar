@@ -3,6 +3,7 @@
   import firebase from 'firebase/app'
   import 'firebase/auth'
   import axios from 'axios' 
+  import { useNavigation } from '@react-navigation/native'
 
 
   const ClientRegister = () => {
@@ -11,25 +12,30 @@
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
-    const handleRegistration = async () => {
-      try {
-        await firebase.auth().createUserWithEmailAndPassword(email, password)
-        const user = firebase.auth().currentUser
+    const navigation = useNavigation()
 
-        const response = await axios.post('http://localhost:3000/client/Add', {
-          firstname,
-          lastname,
-          email,
-          password,
-          profile_pic: '',
-          phone_number: phone_number,
-          location: '', 
-        })
-        Alert.alert('Registration Successful', 'Welcome to Barbar, enjoy your visit ')
-      } catch (error) {
-        Alert.alert('Error', 'An error occurred while creating your profile.')
-      }
+  const handleRegistration = async () => {
+    try {
+      await firebase.auth().createUserWithEmailAndPassword(email, password)
+      const client = firebase.auth().currentclient
+
+      const response = await axios.post('http://localhost:3000/client/Add', {
+        firstname,
+        lastname,
+        email,
+        password,
+        profile_pic: '',
+        phone_number: phone_number,
+        location: '',
+      })
+
+      Alert.alert('Registration Successful', 'Welcome to Barbar, enjoy your visit ')
+
+      navigation.navigate('ProfileScreen', { client })
+    } catch (error) {
+      Alert.alert('Error', 'An error occurred while creating your profile.')
     }
+  }
 
     return (
       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
