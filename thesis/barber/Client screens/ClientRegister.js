@@ -30,7 +30,6 @@
       })
 
       Alert.alert('Registration Successful', 'Welcome to Barbar, enjoy your visit ')
-
       navigation.navigate('ProfileScreen', { client })
     } catch (error) {
       Alert.alert('Error', 'An error occurred while creating your profile.')

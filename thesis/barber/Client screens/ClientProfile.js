@@ -16,7 +16,7 @@ const ProfileScreen = () => {
   
     const navigation = useNavigation()
   
-    const handleUpdateProfile = async () => {
+    const handleUpdate = async () => {
       try {
         await user.updateProfile({
           displayName: `${firstname} ${lastname}`,
@@ -36,7 +36,7 @@ const ProfileScreen = () => {
       }
     }
   
-    const handleDeleteAccount = async () => {
+    const handleDelete = async () => {
       try {
         await user.delete()
         const response = await axios.post('http://localhost:3000/client/deleteAccount')
@@ -69,10 +69,10 @@ const ProfileScreen = () => {
           style={styles.input}
         />
         <View style={styles.buttonContainer}>
-          <Button title="Update Profile" onPress={handleUpdateProfile} />
+          <Button title="Update Profile" onPress={handleUpdate} />
         </View>
         <View style={styles.buttonContainer}>
-          <Button title="Delete Account" onPress={handleDeleteAccount} />
+          <Button title="Delete profile" onPress={handleDelete} />
         </View>
       </View>
     )
