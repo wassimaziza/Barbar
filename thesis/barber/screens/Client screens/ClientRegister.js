@@ -24,15 +24,15 @@
         lastname,
         email,
         password,
-        profile_pic: '',
-        phone_number: phone_number,
+        profile_pic: 'https://thumbs.dreamstime.com/b/default-avatar-profile-flat-icon-social-media-user-vector-portrait-unknown-human-image-default-avatar-profile-flat-icon-184330869.jpg',
+        phone_number: '',
         location: '',
       })
 
       Alert.alert('Registration Successful', 'Welcome to Barbar, enjoy your visit ')
-      navigation.navigate('ProfileScreen', { client })
+      navigation.navigate('ClientProfile', { client })
     } catch (error) {
-      Alert.alert('Error', 'An error occurred while creating your profile.')
+      Alert.alert('Error', 'Impossible to create you profile as an error has occurred')
     }
   }
 
