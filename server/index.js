@@ -6,11 +6,10 @@ const PORT=process.env.PORT||3000
 require('dotenv').config()
 //!importing routes
 const Client=require("./router/client")
-const work = require("./router/work")
 const booking =require("./router/booking")
 const Admin = require("./router/admin")
 const barber = require("./router/barber")
-const rating = require("./router/rating")
+
 
 
 
@@ -21,12 +20,11 @@ app.use(express.urlencoded({extended:true}))
 app.use(cors({origin:"*"}));
 
 //!using routes
-app.use("/work",work)
 app.use("/client",Client) 
 app.use("/booking",booking )
 app.use("/admin",Admin)
 app.use("/barber",barber)
-app.use("/rating",rating)  
+  
 
 
 app.listen(PORT, function () {

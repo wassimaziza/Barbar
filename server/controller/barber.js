@@ -11,7 +11,7 @@ module.exports = {
       if (!barber) {
         res.status(404).json({ error: 'Barber not found' })
       } else {
-        const token = jwt.sign({ barberId: barber.idbarber }, jwtConfig.secret, {
+        const token = jwt.sign({ barberId: barber.idbarber }, jwtConfig.secretKey, {
           expiresIn: jwtConfig.expiresIn,
         })
         res.status(200).json({ token })
@@ -30,7 +30,7 @@ module.exports = {
       password,
       profile_pic,
     } = req.body
-
+    console.log(req.body)
     try {
       const barber = await db.barber.create({
         firstname,
@@ -39,9 +39,10 @@ module.exports = {
         password,
         profile_pic,
       })
+      
 
       // Generate JWT token
-      const token = jwt.sign({ barberId: barber.idbarber }, jwtConfig.secret, {
+      const token = jwt.sign({ barberId: barber.idbarber }, jwtConfig.secretKey, {
         expiresIn: jwtConfig.expiresIn,
       })
 
@@ -92,7 +93,7 @@ module.exports = {
       shop_logo,
       shop_name,
     } = req.body
-    const barberId = req.barberId //! Get barberid from JWT 
+    const barberId = req.barberId  
 
     try {
       //! Update barber's info
@@ -203,7 +204,7 @@ module.exports = {
     const barberId = req.barberId 
 
     try {
-      const barber = await db.barber.findByPk(barberId, { include: db.BarberShop })
+      const barber = await db.barber.findByPk(barberId)
       if (!barber) {
         return res.status(404).json({ error: 'Barber not found' })
       }
@@ -232,7 +233,7 @@ module.exports = {
   })
    const totalRatings = ratings.length
    const totalScore = ratings.reduce((acc, rating) =>acc + rating.score, 0)
-   const averageRating = totalRatings>0 ? totalScore / totalRatings : 0;
+   const averageRating = totalRatings>0 ? totalScore / totalRatings : 0
 
 
    res.status(200).json({ratings,averageRating})
@@ -256,10 +257,10 @@ module.exports = {
     res.status(500).json(err.message)
   }
  },
- addWork:async (req,res)=>{
-  const barberId = req.user.uid
-   const {image,video,description,haircut_title,price,discount}=req.body
-   try{
+ addWork: async (req, res) => {
+  const barberId = req.barberId
+  const { image, video, description, haircut_title, price, discount } = req.body
+  try {
     const work = await db.work.create({
       image,
       video,
@@ -267,34 +268,34 @@ module.exports = {
       haircut_title,
       price,
       discount,
-      barber_id:barberId
+      barber_id: barberId, 
     })
     res.status(201).json(work)
-   }catch(err){
-console.log(err);
-res.status(500).json(err)
-   }
+  } catch (err) {
+    console.log(err)
+    res.status(500).json(err)
+  }
 },
-updateWork:async (req,res)=>{
-  const {work_id}=req.params
-  const {image,video,description,haircut_title,price,discount}=req.body
-  try{
-    const work = db.work.findByPk(work_id) 
-    if (!work){
+
+updateWork: async (req, res) => {
+  const { work_id } = req.params
+  const { image, video, description, haircut_title, price, discount } = req.body
+  try {
+    const work = await db.work.findByPk(work_id)
+    if (!work) {
       return res.status(404).json("work not found")
     }
-    work.image = image,
-    work.video = video,
-    work.description = description,
-    work.haircut_title =haircut_title,
-    work.price = price,
-    work.discount = discount,
+    work.image = image
+    work.video = video
+    work.description = description
+    work.haircut_title = haircut_title
+    work.price = price
+    work.discount = discount
     await work.save()
     res.json(work)
-  }
-  catch(err){
-   console.log(err);
-   res.status(500).json(err.message)
+  } catch (err) {
+    console.log(err)
+    res.status(500).json(err.message)
   }
 },
 deleteWork:async (req,res)=>{

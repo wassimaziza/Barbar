@@ -28,7 +28,7 @@ module.exports = (sequelize, DataTypes) => {
       },
       shop_name: {
         type: DataTypes.STRING(45),
-        allowNull: false,
+        allowNull: true,
       },
       shop_logo: {
         type: DataTypes.STRING(255),
@@ -44,7 +44,7 @@ module.exports = (sequelize, DataTypes) => {
       },
       idCard: {
         type: DataTypes.INTEGER,
-        allowNull: false,
+        allowNull: true,
         validate: {
           isInt: true,
           len: [8, 8],
@@ -52,7 +52,7 @@ module.exports = (sequelize, DataTypes) => {
       },
       location: {
         type: DataTypes.STRING(255),
-        allowNull: false,
+        allowNull: true,
       },
       points: {
         type: DataTypes.INTEGER,
