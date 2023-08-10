@@ -258,8 +258,17 @@ module.exports = {
   }
  },
  addWork: async (req, res) => {
-  const barberId = req.barberId
-  const { image, video, description, haircut_title, price, discount } = req.body
+  const userId = req.userId; // Change req.barberId to req.userId
+
+  const {
+    image,
+    video,
+    description,
+    haircut_title,
+    price,
+    discount
+  } = req.body;
+
   try {
     const work = await db.work.create({
       image,
@@ -268,23 +277,41 @@ module.exports = {
       haircut_title,
       price,
       discount,
-      barber_id: barberId, 
+      barber_id: userId 
     })
-    res.status(201).json(work)
+
+    res.status(201).json(work);
   } catch (err) {
-    console.log(err)
-    res.status(500).json(err)
+    console.log(err);
+    res.status(500).json(err);
   }
 },
 
+
 updateWork: async (req, res) => {
-  const { work_id } = req.params
-  const { image, video, description, haircut_title, price, discount } = req.body
+  const { work_id } = req.params;
+  const userId = req.userId; // Change req.barberId to req.userId
+
+  const {
+    image,
+    video,
+    description,
+    haircut_title,
+    price,
+    discount
+  } = req.body;
+
   try {
-    const work = await db.work.findByPk(work_id)
+    const work = await db.work.findByPk(work_id);
     if (!work) {
-      return res.status(404).json("work not found")
+      return res.status(404).json("Work not found");
     }
+
+    //! Check if the work belongs to the logged-in user
+    if (work.barber_id !== userId) {
+      return res.status(403).json("You don't have permission to update this work");
+    }
+
     work.image = image
     work.video = video
     work.description = description
@@ -292,20 +319,35 @@ updateWork: async (req, res) => {
     work.price = price
     work.discount = discount
     await work.save()
-    res.json(work)
+
+    res.json(work);
   } catch (err) {
-    console.log(err)
-    res.status(500).json(err.message)
+    console.log(err);
+    res.status(500).json(err.message);
   }
 },
-deleteWork:async (req,res)=>{
-  const {work_id}=req.params
-  try{
-await db.work.destroy({where:{id:work_id}})
-res.status(200).json("work no more exists")
-  }catch(err){
-console.log(err)
-res.status(500).json(err)
-}
-}
+
+deleteWork: async (req, res) => {
+  const { work_id } = req.params;
+  const userId = req.userId; 
+
+  try {
+    const work = await db.work.findByPk(work_id);
+    if (!work) {
+      return res.status(404).json("Work not found");
+    }
+
+    // !Check if the work belongs to the logged-in user
+    if (work.barber_id !== userId) {
+      return res.status(403).json("You don't have permission to delete this work");
+    }
+
+    await work.destroy();
+    res.status(200).json("Work no longer exists");
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+  }
+},
+
 }
