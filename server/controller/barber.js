@@ -42,7 +42,7 @@ module.exports = {
       
 
       // Generate JWT token
-      const token = jwt.sign({ barberId: barber.idbarber }, jwtConfig.secretKey, {
+      const token = jwt.sign({ barberId: barber.idbarber ,userType:'barber'}, jwtConfig.secretKey, {
         expiresIn: jwtConfig.expiresIn,
       })
 
@@ -93,7 +93,7 @@ module.exports = {
       shop_logo,
       shop_name,
     } = req.body
-    const barberId = req.barberId  
+    const barberId = req.params.barberId  
 
     try {
       //! Update barber's info
@@ -108,12 +108,12 @@ module.exports = {
       await barber.save()
 
       //!  Update barber shop info
-      const shop = await db.BarberShop.findOne({ where: { BarberId: barber.idbarber } })
-      if (shop) {
-        shop.shop_name = shop_name
-        shop.shop_logo = shop_logo
-        await shop.save()
-      }
+      // const shop = await db.BarberShop.findOne({ where: { BarberId: barber.idbarber } })
+      // if (shop) {
+      //   shop.shop_name = shop_name
+      //   shop.shop_logo = shop_logo
+      //   await shop.save()
+      // }
 
       res.status(200).json({ message: 'Barber info updated successfully' })
     } catch (err) {
@@ -122,8 +122,8 @@ module.exports = {
     }
   },
 
-  logout: async (req, res) => {
-    const barberId = req.barberId
+  delete: async (req, res) => {
+    const barberId = req.params.barberId
 
     try {
       //! Delete barber and his shop
@@ -141,7 +141,7 @@ module.exports = {
   },
 
   getBarberBookings: async (req, res) => {
-    const barberId = req.barberId 
+    const barberId = req.params.barberId 
 
     try {
       const bookings = await db.booking.findAll({ where: { BarberId: barberId } })
@@ -153,7 +153,7 @@ module.exports = {
   },
 
   updateBookingStatus: async (req, res) => {
-    const barberId = req.barberId
+    const barberId = req.params.barberId
     const { bookingId, status } = req.body
 
     try {
@@ -183,7 +183,7 @@ module.exports = {
   },
 
   cancelBooking: async (req, res) => {
-    const barberId = req.barberId
+    const barberId = req.params.barberId
     const { bookingId } = req.params
 
     try {
@@ -200,21 +200,7 @@ module.exports = {
     }
   },
 
-  getBarberProfile: async (req, res) => {
-    const barberId = req.barberId 
-
-    try {
-      const barber = await db.barber.findByPk(barberId)
-      if (!barber) {
-        return res.status(404).json({ error: 'Barber not found' })
-      }
-
-      res.status(200).json(barber)
-    } catch (err) {
-      console.log(err)
-      res.status(500).json({ error: 'Internal server error' })
-    }
-  },
+ 
 
  getRatingByBarber:async (req,res)=>{
   try {

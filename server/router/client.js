@@ -4,8 +4,8 @@ const { authenticateToken } = require('../jwtConfig/authenticateToken'); // Assu
 
 router.post('/login', clientController.login);
 router.post('/signup', clientController.signUp);
-router.put('/updateProfile', authenticateToken, clientController.updateProfile);
-router.delete('/deleteAccount', authenticateToken, clientController.deleteAccount);
+router.put('/updateProfile/:idclient', authenticateToken, clientController.updateProfile);
+router.delete('/deleteAccount/:idclient', authenticateToken, clientController.deleteAccount);
 router.post('/addRating', authenticateToken, clientController.addRating);
 router.get('/getWorkByBarber/:barber_id', authenticateToken, clientController.getWorkByBarber);
 router.get('/getOneWork/:work_id', authenticateToken, clientController.getOneWork);

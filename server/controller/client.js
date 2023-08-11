@@ -11,7 +11,7 @@ module.exports = {
         return res.status(401).json({ error: "Invalid credentials" })
       }
 
-      const token = jwt.sign({ idclient: client.idclient }, jwtConfig.secret, {
+      const token = jwt.sign({ idclient: client.idclient }, jwtConfig.secretKey, {
         expiresIn: jwtConfig.expiresIn,
       })
       res.status(200).json({ token })
@@ -29,6 +29,7 @@ module.exports = {
       password,
       profile_pic,
       phone_number,
+      location,
     } = req.body
     try {
       const createdClient = await db.client.create({
@@ -39,6 +40,7 @@ module.exports = {
         profile_pic,
         phone_number,
         points: 100,
+        location,
       })
       res.status(201).json(createdClient)
     } catch (err) {
@@ -48,19 +50,20 @@ module.exports = {
   },
 
   updateProfile: async (req, res) => {
-    const { firstname, lastname, profile_pic, phone_number } = req.body
+    const { firstname, lastname, profile_pic, phone_number,location } = req.body
     try {
-      const clientId = req.user.idclient
+      const clientId = req.params.idclient
       const updatedClient = await db.client.update(
         {
           firstname,
           lastname,
           profile_pic,
           phone_number,
+          location,
         },
         { where: { idclient: clientId } }
       )
-      res.status(200).json(updatedClient)
+      res.status(200).json("update infos done successfully")
     } catch (err) {
       console.log(err)
       res.status(500).json({ error: "Internal server error" })
@@ -68,7 +71,7 @@ module.exports = {
   },
 
   deleteAccount: async (req, res) => {
-    const clientId = req.user.idclient
+    const clientId = req.params.idclient
     try {
       await db.client.destroy({ where: { idclient: clientId } })
       res.status(200).json({ message: "Account deleted successfully" })
@@ -80,7 +83,7 @@ module.exports = {
   addRating:async (req,res) =>{
     try {
       const {score,review,barber_id} = req.body
-      const user =req.user 
+      const user =req.params.idclient 
       if(!user){
         return res.status(403).json("cannot access")
       }
