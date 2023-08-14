@@ -1,26 +1,26 @@
 "use client"
-import React, { useState } from "react"
-import axios from "axios"
-import { useRouter } from "next/navigation" // Import useRouter
-import Button from "@mui/material/Button"
-import TextField from "@mui/material/TextField"
-import Paper from "@mui/material/Paper"
-import Box from "@mui/material/Box"
-import Typography from "@mui/material/Typography"
-import Avatar from "@mui/material/Avatar"
-import LockOutlinedIcon from "@mui/icons-material/LockOutlined"
-import { createTheme, ThemeProvider } from "@mui/material/styles"
+import React, { useState } from "react";
+import axios from "axios";
+import { useRouter } from "next/navigation"; // Import useRouter
+import Button from "@mui/material/Button";
+import TextField from "@mui/material/TextField";
+import Paper from "@mui/material/Paper";
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
+import Avatar from "@mui/material/Avatar";
+import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 const LoginBarber = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false)
-  const [token, setToken] = useState("")
-  const [email, setEmail] = useState("")
-  const [password, setPassword] = useState("")
-  const [firstname, setFirstname] = useState("")
-  const [lastname, setLastname] = useState("")
-  const [profile_pic, setProfilePic] = useState("")
-  const [showNextButton, setShowNextButton] = useState(false)
-  const router = useRouter() 
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [token, setToken] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [firstname, setFirstname] = useState("");
+  const [lastname, setLastname] = useState("");
+  const [profile_pic, setProfilePic] = useState("");
+  const [showNextButton, setShowNextButton] = useState(false);
+  const router = useRouter();
 
   const handleSignUp = async () => {
     try {
@@ -30,28 +30,30 @@ const LoginBarber = () => {
         email,
         password,
         profile_pic,
-      })
-      console.log("Sign Up Successful", response.data)
-      setIsLoggedIn(true)
-      setToken(response.data.token)
-      setShowNextButton(true)
+      });
+      console.log("Sign Up Successful", response.data);
+      setIsLoggedIn(true);
+      setToken(response.data.token);
+      setShowNextButton(true);
+      
+      localStorage.setItem("barberSignUp", JSON.stringify(response.data));
     } catch (error) {
-      console.error("Cannot sign up, please try again", error)
+      console.error("Cannot sign up, please try again", error);
     }
-  }
+  };
 
   const handleNext = () => {
-    router.push("/loginShop") 
-  }
+    router.push("/loginShop");
+  };
 
   const handleSubmit = (e) => {
-    e.preventDefault()
-    handleSignUp()
-  }
+    e.preventDefault();
+    handleSignUp();
+  };
 
   const handleLogout = () => {
-    setIsLoggedIn(true)
-    setToken("")
+    setIsLoggedIn(false); // Set to false to indicate logout
+    setToken("");
   }
 
   return (

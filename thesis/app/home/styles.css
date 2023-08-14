@@ -1,173 +1,20 @@
-
- .navbar {
-  background-color: #f80000;
-}
-
-.navbar-brand {
-  font-size: 2rem;
-  font-weight: 600;
-  color: #050505;
-  transition: color 0.3s ease;
-}
-
-.navbar-toggler-icon {
-  background-color: #fff;
-}
-
-.nav-item {
-  font-size: 1.2rem;
-  margin: 0 15px;
-  color: #020202;
-  transition: color 0.3s ease;
-}
-
-.nav-item:hover {
-  color: #3498db;
-} 
-.carousel-inner {
-  position: relative;
-}
-
-.carousel-caption {
-  background-color: rgba(0, 0, 0, 0.7);
-  padding: 20px;
-  border-radius: 10px;
-  opacity: 0.9;
-  transform: translateY(-20px);
-  transition: opacity 0.3s ease, transform 0.3s ease;
-}
-
-.carousel-caption h1 {
-  font-size: 3rem;
-  font-weight: 600;
-  color: #fff;
-  margin-bottom: 10px;
-}
-
-.carousel-caption h4 {
-  font-size: 1.2rem;
-  font-weight: 300;
-  color: #fff;
-}
-
-.carousel-item.active .carousel-caption {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.service-item {
-  background-color: #f8f9fa;
-  border-radius: 10px;
-  padding: 20px;
-  text-align: center;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.service-item:hover {
-  transform: translateY(-10px);
-  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
-}
-
-.service-item h3 {
-  font-size: 1.5rem;
-  font-weight: 600;
-  margin-top: 0;
-}
-
-.service-item p {
-  font-size: 1rem;
-  margin-bottom: 10px;
-}
-
-.service-item span {
-  font-size: 1.2rem;
-  font-weight: 600;
-  color: #3498db;
-}
-
-
-.team-item {
-  background-color: #f8f9fa;
-  border-radius: 10px;
-  padding: 20px;
-  text-align: center;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.team-item:hover {
-  transform: translateY(-10px);
-  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
-}
-
-.team-item h5 {
-  font-size: 1.2rem;
-  font-weight: 600;
-  margin-top: 10px;
-}
-
-.team-item span {
-  font-size: 1rem;
-  color: #666;
-}
-
-.working-hours {
-  background-color: #f8f9fa;
-  border-radius: 10px;
-  padding: 20px;
-  text-align: center;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.working-hours:hover {
-  transform: translateY(-10px);
-  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
-}
-
-.working-hours h1 {
-  font-size: 2rem;
-  font-weight: 600;
-  margin-top: 0;
-}
-
-.working-hours h6 {
-  font-size: 1.2rem;
-  font-weight: 600;
-  margin-bottom: 5px;
-}
-
-.working-hours span {
-  font-size: 1.2rem;
-  color: #666;
-}
-
-
-.back-to-top {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  background-color: #3498db;
-  color: #fff;
-  border: none;
-  padding: 10px 15px;
-  border-radius: 50%;
-  font-size: 1.5rem;
-  cursor: pointer;
-  opacity: 0.8;
-  transition: opacity 0.3s ease;
-}
-
-.back-to-top:hover {
-  opacity: 1;
-}  
-/* Navbar.module.css */
+/* Navbar */
 .navbar {
   background-color: #252a34;
-  padding: 10px 0;
+  padding: 10px 10px;
   position: fixed;
   top: 0;
   width: 100%;
   z-index: 1000;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+.navbar{
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: 1fr;
+    grid-column-gap: 100px;
+    grid-row-gap: 10px;
+    
 }
 
 .navbar-brand {

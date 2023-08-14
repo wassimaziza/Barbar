@@ -8,7 +8,6 @@ function HomePage() {
     <div>
        <nav className="navbar navbar-expand-lg bg-secondary navbar-dark sticky-top py-lg-0 px-lg-5 wow fadeIn" data-wow-delay="0.1s">
         <a href="#" class="navbar-brand ms-4 ms-lg-0">
-          <h1 class="mb-0 text-primary text-uppercase"><i class="fa fa-cut me-3"></i>HairCut</h1>
         </a>
         <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
           <span class="navbar-toggler-icon"></span>
@@ -19,58 +18,19 @@ function HomePage() {
             <Link href="/shop" class="nav-item nav-link">Shop</Link>
             <Link href="/services" class="nav-item nav-link">Services</Link>
             <Link href="/contact" class="nav-item nav-link">Contact</Link>
-            <div class="nav-item dropdown">
+            {/* <div class="nav-item dropdown">
               <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Profile</a>
               <div class="dropdown-menu m-0">
                 <a href="price.html" class="dropdown-item">Profile</a>
                 <a href="team.html" class="dropdown-item">Liked Barber</a>
               </div>
-            </div>
+            </div> */}
             <Link href="/loginClient" class="nav-item nav-link">Join Us</Link>
             <Link href="/loginBarber" class="nav-item nav-link">Start Your Shop Already!</Link>
           </div>
           <a href="" class="btn btn-primary rounded-0 py-2 px-lg-4 d-none d-lg-block">Book an Appointment<i class="fa fa-arrow-right ms-3"></i></a>
         </div>
       </nav>    
-
-      <div className="container-fluid p-0 mb-5 wow fadeIn" data-wow-delay="0.1s">
-      <div id="header-carousel" class="carousel slide" data-bs-ride="carousel">
-            <div class="carousel-inner">
-                <div class="carousel-item active">
-                    <img class="w-100" src="/public/carousel-1.jpg" alt="Image"/>
-                    <div class="carousel-caption d-flex align-items-center justify-content-center text-start">
-                        <div class="mx-sm-5 px-5" >
-                            <h1 class="display-2 text-white text-uppercase mb-4 animated slideInDown">We Will Keep You An Awesome Look</h1>
-                            <h4 class="text-white text-uppercase mb-4 animated slideInDown"><i class="fa fa-map-marker-alt text-primary me-3"></i>123 Street, New York, USA</h4>
-                            <h4 class="text-white text-uppercase mb-4 animated slideInDown"><i class="fa fa-phone-alt text-primary me-3"></i>+012 345 67890</h4>
-                        </div>
-                    </div>
-                </div>
-                <div class="carousel-item">
-                    <img class="w-100" src="/public/carousel-2.jpg" alt="Image"/>
-                    <div class="carousel-caption d-flex align-items-center justify-content-center text-start">
-                        <div class="mx-sm-5 px-5">
-                            <h1 class="display-2 text-white text-uppercase mb-4 animated slideInDown">Luxury Haircut at Affordable Price</h1>
-                            <h4 class="text-white text-uppercase mb-4 animated slideInDown"><i class="fa fa-map-marker-alt text-primary me-3"></i>123 Street, New York, USA</h4>
-                            <h4 class="text-white text-uppercase mb-4 animated slideInDown"><i class="fa fa-phone-alt text-primary me-3"></i>+012 345 67890</h4>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#header-carousel"
-                data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Previous</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#header-carousel"
-                data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Next</span>
-            </button>
-        </div>
-      </div>
-
-
       <div className="container-xxl py-5">
       <div class="container">
             <div class="row g-5">
