@@ -1,7 +1,7 @@
 "use client"
 import React from "react";
-import "./styles.css"; 
-import { Link } from "react-router-dom"
+import Link from "next/link";
+import styles from "./styles.css";
 
 function HomePage() {
   return (
@@ -15,10 +15,10 @@ function HomePage() {
         </button>
         <div class="collapse navbar-collapse" id="navbarCollapse">
           <div class="navbar-nav ms-auto p-4 p-lg-0">
-            <Link to="/" class="nav-item nav-link active">Home</Link>
-            <Link to="/shop" class="nav-item nav-link">Shop</Link>
-            <Link to="/services" class="nav-item nav-link">Services</Link>
-            <Link to="/contact" class="nav-item nav-link">Contact</Link>
+            <Link href="/" class="nav-item nav-link active">Home</Link>
+            <Link href="/shop" class="nav-item nav-link">Shop</Link>
+            <Link href="/services" class="nav-item nav-link">Services</Link>
+            <Link href="/contact" class="nav-item nav-link">Contact</Link>
             <div class="nav-item dropdown">
               <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Profile</a>
               <div class="dropdown-menu m-0">
@@ -26,8 +26,8 @@ function HomePage() {
                 <a href="team.html" class="dropdown-item">Liked Barber</a>
               </div>
             </div>
-            <Link to="/loginClient" class="nav-item nav-link">Join Us</Link>
-            <Link to="/loginBarber" class="nav-item nav-link">Start Your Shop Already!</Link>
+            <Link href="/loginClient" class="nav-item nav-link">Join Us</Link>
+            <Link href="/loginBarber" class="nav-item nav-link">Start Your Shop Already!</Link>
           </div>
           <a href="" class="btn btn-primary rounded-0 py-2 px-lg-4 d-none d-lg-block">Book an Appointment<i class="fa fa-arrow-right ms-3"></i></a>
         </div>

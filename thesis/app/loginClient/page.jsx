@@ -1,3 +1,4 @@
+"use client"
 import React, { useState } from "react"
 import axios from "axios"
 import "./styles.css"
@@ -7,6 +8,9 @@ import Paper from "@mui/material/Paper"
 import Box from "@mui/material/Box"
 import Typography from "@mui/material/Typography"
 import { createTheme, ThemeProvider } from "@mui/material/styles"
+import Avatar from '@mui/material/Avatar'
+import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+
 
 const LoginClient = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false)
@@ -18,7 +22,7 @@ const LoginClient = () => {
 
   const handleLogin = async (formData) => {
     try {
-      const response = await axios.post("/client/login", formData)
+      const response = await axios.post("http://localhost:3000/client/login", formData)
       console.log("Login Successful", response.data)
       setIsLoggedIn(true)
       setToken(response.data.token)
@@ -29,7 +33,7 @@ const LoginClient = () => {
 
   const handleSignUp = async (formData) => {
     try {
-      const response = await axios.post("/client/signUp", formData)
+      const response = await axios.post("http://localhost:3000/client/signUp", formData)
       console.log("Sign Up Successful", response.data)
       setIsLoggedIn(true)
       setToken(response.data.token)

@@ -1,93 +1,111 @@
+/* Navbar.module.css */
+.navbar {
+  background-color: #343a40;
+  padding: 15px 0;
+}
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
+.navbarBrand {
+  text-decoration: none;
+}
 
-  .nav-bar {
-    background-color: transparent;
-    border: 1px solid #ccc;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px;
-  }
-  
-  .nav-content {
-    max-width: 1200px;
-    margin: 0 auto;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px;
-  }
-  
-  .nav-menu {
-    display: flex;
-    align-items: center;
-    list-style: none;
-    flex: 1;
-    justify-content: space-around; 
-  }
-  
-  .nav-logo {
-    flex: 1; 
-    display: flex;
-    justify-content: center; 
-  }
-  .nav-logo img {
-    max-width: 100%;
-    height: auto;
-  }
+.brandText {
+  font-size: 24px;
+  font-weight: bold;
+  color: #17a2b8;
+  display: flex;
+  align-items: center;
+}
 
-  .nav-menu-item {
-    margin: 0 10px;
-    list-style: none;
-  }
-  
-  .nav-menu-item a {
-    text-decoration: none;
-    color: gold !important;
-    font-weight: bold;
-    padding: 5px 50px;
-    border-radius: 5px;
-    
-  }
+.brandIcon {
+  font-size: 32px;
+  margin-right: 10px;
+}
 
-  .nav-menu-item a:hover {
-    text-decoration:underline;
-  }
-  .container {
-    position: relative;
-    display: inline-block;
-  }
-  
-  #imageLink {
-    display: block;
-    margin-left: 300%;
-  }
-  
-  .dropdown {
-    display: none;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    width: 200%;
-    margin-left: 300%;
-    font:  url('https://fonts.googleapis.com/css2?family=Oswald:wght@200&family=Sree+Krushnadevaraya&display=swap');;
-  }
-  
-  #imageLink:hover + #dropdown {
-    display: block;
-  }
-  option {
-    color: antiquewhite;
-  }
-  
-  @media screen and (max-width: 768px) {
-    .nav-menu {
-      display: none;
-    }
-  }
-  
+.navbarToggler {
+  background-color: transparent;
+  border: none;
+  outline: none;
+  color: #fff;
+  font-size: 24px;
+}
+
+.navbarTogglerIcon {
+  font-size: 24px;
+}
+
+.collapse {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navbarNav {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+  margin: 0;
+  padding: 0;
+}
+
+.navLink {
+  text-decoration: none;
+  color: #fff;
+  transition: color 0.3s;
+}
+
+.active {
+  color: #17a2b8;
+}
+
+.navItem {
+  position: relative;
+}
+
+.dropdownToggle {
+  cursor: pointer;
+}
+
+.dropdownMenu {
+  position: absolute;
+  background-color: #343a40;
+  border: 1px solid #17a2b8;
+  padding: 10px 0;
+  top: 100%;
+  left: 0;
+  display: none;
+  z-index: 10;
+}
+
+.dropdownItem {
+  display: block;
+  padding: 5px 20px;
+  color: #fff;
+  text-decoration: none;
+  transition: background-color 0.3s;
+}
+
+.dropdownItem:hover {
+  background-color: #17a2b8;
+}
+
+.bookButton {
+  background-color: #17a2b8;
+  color: #fff;
+  border: none;
+  border-radius: 0;
+  padding: 10px 20px;
+  font-size: 18px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  transition: background-color 0.3s;
+}
+
+.bookButtonIcon {
+  font-size: 20px;
+  margin-left: 10px;
+}
+
+.bookButton:hover {
+  background-color: #135e6d;
+}
