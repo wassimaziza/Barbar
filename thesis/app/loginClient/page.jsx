@@ -1,109 +1,83 @@
 "use client"
-import React, { useState } from "react"
-import axios from "axios"
-import "./styles.css"
-import Button from "@mui/material/Button"
-import TextField from "@mui/material/TextField"
-import Paper from "@mui/material/Paper"
-import Box from "@mui/material/Box"
-import Typography from "@mui/material/Typography"
-import { createTheme, ThemeProvider } from "@mui/material/styles"
-import Avatar from '@mui/material/Avatar'
+import React, { useState } from 'react';
+import Avatar from '@mui/material/Avatar';
+import Button from '@mui/material/Button';
+import CssBaseline from '@mui/material/CssBaseline';
+import TextField from '@mui/material/TextField';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Checkbox from '@mui/material/Checkbox';
+import Link from '@mui/material/Link';
+import Paper from '@mui/material/Paper';
+import Box from '@mui/material/Box';
+import Grid from '@mui/material/Grid';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import Typography from '@mui/material/Typography';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+import axios from 'axios';
 
+const defaultTheme = createTheme();
 
-const LoginClient = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false)
-  const [showSignUpForm, setShowSignUpForm] = useState(false)
-  const [token, setToken] = useState("")
-  const toggleForm = () => {
-    setShowSignUpForm((prevValue) => !prevValue)
-  }
+export default function SignInSide() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const handleLogin = async (formData) => {
     try {
-      const response = await axios.post("http://localhost:3000/client/login", formData)
-      console.log("Login Successful", response.data)
-      setIsLoggedIn(true)
-      setToken(response.data.token)
+      const response = await axios.post('http://localhost:3000/client/login', formData);
+      console.log('Login Successful', response.data);
+      setIsLoggedIn(true);
     } catch (error) {
-      console.error("Cannot login, please try again", error)
+      console.error('Cannot login, please try again', error);
     }
-  }
+  };
 
-  const handleSignUp = async (formData) => {
-    try {
-      const response = await axios.post("http://localhost:3000/client/signUp", formData)
-      console.log("Sign Up Successful", response.data)
-      setIsLoggedIn(true)
-      setToken(response.data.token)
-    } catch (error) {
-      console.error("check your sign up , an error has occurred", error)
-    }
-  }
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    const formData = new FormData(event.currentTarget);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault()
-    const formData = new FormData(e.target)
+    const data = {
+      email: formData.get('email'),
+      password: formData.get('password'),
+    };
 
-    if (showSignUpForm) {
-      handleSignUp({
-        firstname: formData.get("firstname"),
-        lastname: formData.get("lastname"),
-        email: formData.get("email"),
-        password: formData.get("password"),
-        profile_pic: "",
-        phone_number: formData.get("phone_number"),
-        location: formData.get("location"),
-      })
-    } else {
-      handleLogin({
-        email: formData.get("email"),
-        password: formData.get("password"),
-      })
-    }
-  }
-
-  const handleLogout = () => {
-    setIsLoggedIn(false)
-    setToken("")
-  }
+    handleLogin(data);
+  };
 
   return (
-    <div className="loginContainer">
-      {isLoggedIn ? (
-        <button className="logoutButton" onClick={handleLogout}>
-          Logout
-        </button>
-      ) : (
-        <div>
-          <button className="actionButton" onClick={toggleForm}>
-            Login
-          </button>
-          <button className="actionButton" onClick={toggleForm}>
-            Sign Up
-          </button>
-        </div>
-      )}
-
-      {isLoggedIn ? (
-        <div className="welcomeMessage">Welcome, you are logged in!</div>
-      ) : (
-        <ThemeProvider theme={createTheme()}>
-          <Paper elevation={6} square>
-            <Box
-              sx={{
-                my: 8,
-                mx: 4,
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-              }}
-            >
-              <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
-                <LockOutlinedIcon />
-              </Avatar>
-              <form noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
+    <ThemeProvider theme={defaultTheme}>
+      <Grid container component="main" sx={{ height: '100vh' }}>
+        <CssBaseline />
+        <Grid
+          item
+          xs={false}
+          sm={4}
+          md={7}
+          sx={{
+            backgroundImage: 'url(/signUp.jpg)',
+            backgroundRepeat: 'no-repeat',
+            backgroundColor: (t) =>
+              t.palette.mode === 'light' ? t.palette.grey[50] : t.palette.grey[900],
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+          }}
+        />
+        <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
+          <Box
+            sx={{
+              my: 8,
+              mx: 4,
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+            }}
+          >
+            <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+              <LockOutlinedIcon />
+            </Avatar>
+            <Typography component="h1" variant="h5">
+              {isLoggedIn ? 'Logged in' : 'Sign in'}
+            </Typography>
+            {!isLoggedIn && (
+              <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
                 <TextField
                   margin="normal"
                   required
@@ -124,57 +98,30 @@ const LoginClient = () => {
                   id="password"
                   autoComplete="current-password"
                 />
-                {showSignUpForm && (
-                  <>
-                    <TextField
-                      margin="normal"
-                      required
-                      fullWidth
-                      name="firstname"
-                      label="First Name"
-                      id="firstname"
-                    />
-                    <TextField
-                      margin="normal"
-                      required
-                      fullWidth
-                      name="lastname"
-                      label="Last Name"
-                      id="lastname"
-                    />
-                    <TextField
-                      margin="normal"
-                      required
-                      fullWidth
-                      name="phone_number"
-                      label="Phone Number"
-                      id="phone_number"
-                    />
-                    <TextField
-                      margin="normal"
-                      required
-                      fullWidth
-                      name="location"
-                      label="Location"
-                      id="location"
-                    />
-                  </>
-                )}
-                <Button
-                  type="submit"
-                  fullWidth
-                  variant="contained"
-                  sx={{ mt: 3, mb: 2 }}
-                >
-                  {showSignUpForm ? "Sign Up" : "Sign In"}
+                <FormControlLabel
+                  control={<Checkbox value="remember" color="primary" />}
+                  label="Remember me"
+                />
+                <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
+                  Sign In
                 </Button>
-              </form>
-            </Box>
-          </Paper>
-        </ThemeProvider>
-      )}
-    </div>
-  )
+                <Grid container>
+                  <Grid item xs>
+                    <Link href="#" variant="body2">
+                      Forgot password?
+                    </Link>
+                  </Grid>
+                  <Grid item>
+                    <Link href="#" variant="body2">
+                      {"Don't have an account? Sign Up"}
+                    </Link>
+                  </Grid>
+                </Grid>
+              </Box>
+            )}
+          </Box>
+        </Grid>
+      </Grid>
+    </ThemeProvider>
+  );
 }
-
-export default LoginClient

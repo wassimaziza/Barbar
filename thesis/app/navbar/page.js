@@ -1,43 +1,64 @@
-import React from "react";
-import Link from "next/link";
-import styles from "./styles.css"; 
-import { FaCut, FaArrowRight } from "react-icons/fa"; 
+"use client"
+import React from 'react';
+import Link from 'next/link'
 
-const Navbar = () => {
+const NavBar = () => {
   return (
-    <div>
-        
-    </div>
-    // <nav className={`${styles.navbar} ${styles.stickyTop} ${styles.fadeIn}`} data-wow-delay="0.1s">
-    //   <a href="#" className={`${styles.navbarBrand} ms-4 ms-lg-0`}>
-    //     <h1 className={`${styles.brandText} mb-0 text-primary text-uppercase`}><FaCut className={`${styles.brandIcon} me-3`} />HairCut</h1>
-    //   </a>
-    //   {/* <button type="button" className={`${styles.navbarToggler} me-4`} data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
-    //     <span className={`${styles.navbarTogglerIcon} navbar-toggler-icon`}></span>
-    //   </button> */}
-    //   <div className={`${styles.collapse} ${styles.navbarCollapse}`} id="navbarCollapse">
-    //     <div className={`${styles.navbarNav} ms-auto p-4 p-lg-0`}>
-    //       <Link href="/" className={`${styles.navLink} ${styles.active}`}>Home</Link>
-    //       <Link href="/shop" className={styles.navLink}>Shop</Link>
-    //       <Link href="/services" className={styles.navLink}>Services</Link>
-    //       <Link href="/contact" className={styles.navLink}>Contact</Link>
-    //       <div className={`${styles.navItem} dropdown`}>
-    //         <a href="#" className={`${styles.navLink} ${styles.dropdownToggle}`} data-bs-toggle="dropdown">Profile</a>
-    //         <div className={`${styles.dropdownMenu} m-0`}>
-    //           <a href="price.html" className={`${styles.dropdownItem}`}>Profile</a>
-    //           <a href="team.html" className={`${styles.dropdownItem}`}>Liked Barber</a>
-    //         </div>
-    //       </div>
-    //       <Link href="/loginClient" className={styles.navLink}>Join Us</Link>
-    //       <Link href="/loginBarber" className={styles.navLink}>Start Your Shop Already!</Link>
-    //     </div>
-    //     <a href="" className={`${styles.bookButton} btn btn-primary rounded-0 py-2 px-lg-4 d-none d-lg-block`}>
-    //       Book an Appointment
-    //       <FaArrowRight className={`${styles.bookButtonIcon} ms-3`} />
-    //     </a>
-    //   </div>
-    // </nav>
+    <header className="header">
+      <div className="header-bottom" data-header>
+        <div className="container">
+          <a href="#" className="logo">
+            BarBar
+            <span className="span">barbers booking app</span>
+          </a>
+          <nav className="navbar container" data-navbar>
+      <ul className="navbar-list">
+        <li className="navbar-item">
+            <Link href="/" className="navbar-link" data-nav-link>Home</Link>
+        </li>
+        <li className="navbar-item">
+            <Link href="/services" className="navbar-link" data-nav-link>Services</Link>
+        </li>
+        <li className="navbar-item">
+            <Link href="/shop" className="navbar-link" data-nav-link>Pricing</Link>
+        </li>
+        <li className="navbar-item">
+            <Link href="/work" className="navbar-link" data-nav-link>Gallery</Link>
+        </li>
+        <li className="navbar-item">
+            <Link href="/booking" className="navbar-link" data-nav-link>Appointment</Link>
+        </li>
+        <li className="navbar-item">
+            <Link href="/loginBarber" className="navbar-link" data-nav-link>Start Your Work!</Link>
+        </li>
+      </ul>
+    </nav>
+          <button className="nav-toggle-btn" aria-label="toggle menu" data-nav-toggler>
+            <ion-icon name="menu-outline" aria-hidden="true"></ion-icon>
+          </button>
+          <Link href="/loginClient" className="btn has-before">
+            <span className="span"> Join Us </span>
+            <ion-icon name="arrow-forward" aria-hidden="true"></ion-icon>
+          </Link>
+        </div>
+      </div>
+      <section className="section hero has-before has-bg-image" id="home" aria-label="home"
+    style={{ backgroundImage: "url('/images/hero-banner.jpg')" }}>
+  <div className="container">
+    <h1 className="h1 hero-title">Barbers & Hair Cutting</h1>
+    <p className="hero-text">
+      Sit amet consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua
+      suspendisse
+      ultrices gravida
+    </p>
+    <a href="#" className="btn has-before">
+      <span className="span">Explore Our Services</span>
+      <ion-icon name="arrow-forward" aria-hidden="true"></ion-icon>
+    </a>
+  </div>
+</section>
+    </header>
   );
 };
 
-export default Navbar;
+export default NavBar;

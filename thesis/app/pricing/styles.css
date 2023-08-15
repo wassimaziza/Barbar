@@ -1,0 +1,21 @@
+
+.navbar {
+  background-color: #343a40;
+}
+
+.navLinks {
+  margin-top: 0.5rem;
+  display: flex; 
+  align-items: center; 
+}
+
+.nav-link {
+  color: #ffffff !important;
+  margin-right: 1rem;
+  text-decoration: none; 
+  padding: 0.5rem 1rem; 
+}
+
+.bookAppointmentBtn {
+  margin-top: 0.5rem;
+}
