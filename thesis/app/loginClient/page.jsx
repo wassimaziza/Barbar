@@ -2,43 +2,35 @@
 import React, { useState } from "react"
 import axios from "axios"
 import "./styles.css"
-import Button from "@mui/material/Button"
-import TextField from "@mui/material/TextField"
-import Paper from "@mui/material/Paper"
-import Box from "@mui/material/Box"
-import Typography from "@mui/material/Typography"
-import { createTheme, ThemeProvider } from "@mui/material/styles"
-import Avatar from '@mui/material/Avatar'
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 
 
 const LoginClient = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false)
   const [showSignUpForm, setShowSignUpForm] = useState(false)
-  const [token, setToken] = useState("")
+  const [token, setToken] = useState('')
   const toggleForm = () => {
     setShowSignUpForm((prevValue) => !prevValue)
   }
 
   const handleLogin = async (formData) => {
     try {
-      const response = await axios.post("http://localhost:3000/client/login", formData)
-      console.log("Login Successful", response.data)
+      const response = await axios.post('http://localhost:3000/client/login', formData)
+      console.log('Welcome!', response.data)
       setIsLoggedIn(true)
       setToken(response.data.token)
     } catch (error) {
-      console.error("Cannot login, please try again", error)
+      console.error('login impossible , please try again', error)
     }
   }
 
   const handleSignUp = async (formData) => {
     try {
-      const response = await axios.post("http://localhost:3000/client/signUp", formData)
-      console.log("Sign Up Successful", response.data)
+      const response = await axios.post('http://localhost:3000/client/signUp', formData)
+      console.log('Sign Up Successful', response.data)
       setIsLoggedIn(true)
       setToken(response.data.token)
     } catch (error) {
-      console.error("check your sign up , an error has occurred", error)
+      console.error('Check your sign up, an error has occurred', error)
     }
   }
 
@@ -48,131 +40,79 @@ const LoginClient = () => {
 
     if (showSignUpForm) {
       handleSignUp({
-        firstname: formData.get("firstname"),
-        lastname: formData.get("lastname"),
-        email: formData.get("email"),
-        password: formData.get("password"),
-        profile_pic: "",
-        phone_number: formData.get("phone_number"),
-        location: formData.get("location"),
+        firstname: formData.get('firstname'),
+        lastname: formData.get('lastname'),
+        email: formData.get('email'),
+        password: formData.get('password'),
+        profile_pic: '',
+        phone_number: formData.get('phone_number'),
+        location: formData.get('location'),
       })
     } else {
       handleLogin({
-        email: formData.get("email"),
-        password: formData.get("password"),
+        email: formData.get('email'),
+        password: formData.get('password'),
       })
     }
   }
 
   const handleLogout = () => {
     setIsLoggedIn(false)
-    setToken("")
+    setToken('')
+  }
+
+  if (isLoggedIn) {
+    return <ClientProfile token={token} handleLogout={handleLogout} />
   }
 
   return (
-    <div className="loginContainer">
-      {isLoggedIn ? (
-        <button className="logoutButton" onClick={handleLogout}>
-          Logout
-        </button>
-      ) : (
-        <div>
-          <button className="actionButton" onClick={toggleForm}>
-            Login
-          </button>
-          <button className="actionButton" onClick={toggleForm}>
-            Sign Up
-          </button>
-        </div>
-      )}
-
-      {isLoggedIn ? (
-        <div className="welcomeMessage">Welcome, you are logged in!</div>
-      ) : (
-        <ThemeProvider theme={createTheme()}>
-          <Paper elevation={6} square>
-            <Box
-              sx={{
-                my: 8,
-                mx: 4,
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-              }}
-            >
-              <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
-                <LockOutlinedIcon />
-              </Avatar>
-              <form noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
-                <TextField
-                  margin="normal"
-                  required
-                  fullWidth
-                  id="email"
-                  label="Email Address"
-                  name="email"
-                  autoComplete="email"
-                  autoFocus
-                />
-                <TextField
-                  margin="normal"
-                  required
-                  fullWidth
-                  name="password"
-                  label="Password"
-                  type="password"
-                  id="password"
-                  autoComplete="current-password"
-                />
-                {showSignUpForm && (
-                  <>
-                    <TextField
-                      margin="normal"
-                      required
-                      fullWidth
-                      name="firstname"
-                      label="First Name"
-                      id="firstname"
-                    />
-                    <TextField
-                      margin="normal"
-                      required
-                      fullWidth
-                      name="lastname"
-                      label="Last Name"
-                      id="lastname"
-                    />
-                    <TextField
-                      margin="normal"
-                      required
-                      fullWidth
-                      name="phone_number"
-                      label="Phone Number"
-                      id="phone_number"
-                    />
-                    <TextField
-                      margin="normal"
-                      required
-                      fullWidth
-                      name="location"
-                      label="Location"
-                      id="location"
-                    />
-                  </>
-                )}
-                <Button
-                  type="submit"
-                  fullWidth
-                  variant="contained"
-                  sx={{ mt: 3, mb: 2 }}
-                >
-                  {showSignUpForm ? "Sign Up" : "Sign In"}
-                </Button>
-              </form>
-            </Box>
-          </Paper>
-        </ThemeProvider>
-      )}
+    <div className="login-client">
+       <section class="signup">
+            <div class="container">
+                <div class="signup-content">
+                    <div class="signup-form">
+                        <h2 class="form-title">Sign up</h2>
+                        <form method="POST" class="register-form" id="register-form">
+                            <div class="form-group">
+                                <label for="name"><i class="zmdi zmdi-account material-icons-name"></i></label>
+                                <input type="text" name="name" id="name" placeholder="Your first Name" required/>
+                            </div>
+                            <div class="form-group">
+                                <label for="last name"><i class="zmdi zmdi-account material-icons-name"></i></label>
+                                <input type="text" name="name" id="name" placeholder="Your last Name" required/>
+                            </div>
+                            <div class="form-group">
+                                <label for="email"><i class="zmdi zmdi-email"></i></label>
+                                <input type="email" name="email" id="email" placeholder="Your Email" required/>
+                            </div>
+                            <div class="form-group">
+                                <label for="pass"><i class="zmdi zmdi-lock"></i></label>
+                                <input type="password" name="pass" id="pass" placeholder="Password" required/>
+                            </div>
+                            <div class="form-group">
+                                <label for="phone number"><i class="zmdi zmdi-lock-outline"></i></label>
+                                <input type="text" name="phone-number" id="phone-number" placeholder=" your phone number" required/>
+                            </div>
+                            <div class="form-group">
+                              <label for="location"><i class="zmdi zmdi-lock-outline"></i></label>
+                              <input type="text" name="location" id="location" placeholder=" your location" required/>
+                            </div>
+                            <div class="form-group">
+                                <input type="checkbox" name="agree-term" id="agree-term" class="agree-term"  required />
+                                <label for="agree-term" class="label-agree-term"><span><span></span></span>I agree all statements in  <a href="#" class="term-service">Terms of service</a></label>
+                            </div>
+                            <div class="form-group form-button">
+                                <input type="submit" name="signup" id="signup" class="form-submit" value="Join Us!"/>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="signup-image">
+                        <figure><img src="/images/sign-up.png" alt="sing up image"/></figure>
+                        <a href="#" class="signup-image-link">I am already member</a>
+                    </div>
+                </div>
+            </div>
+        </section>
     </div>
   )
 }
