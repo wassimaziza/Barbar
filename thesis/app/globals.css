@@ -2344,9 +2344,34 @@ label.valid {
     -o-justify-content: center;
     -ms-justify-content: center; }
 
-  .form-button {
-    text-align: center; }
-
+    .button {
+      background-color: #ffffff00;
+      color: #fff;
+      width: 8.5em;
+      height: 2.9em;
+      border: #3654ff 0.2em solid;
+      border-radius: 11px;
+      text-align: right;
+      transition: all 0.6s ease;
+    }
+    
+    .form-button:hover {
+      background-color: #3654ff;
+      cursor: pointer;
+    }
+    
+    .form-button svg {
+      width: 1.6em;
+      margin: -0.2em 0.8em 1em;
+      position: absolute;
+      display: flex;
+      transition: all 0.6s ease;
+    }
+    
+    .form-button:hover svg {
+      transform: translateX(5px);
+    }
+    
   .signin-form {
     order: 1;
     -moz-order: 1;
@@ -2435,4 +2460,168 @@ label.valid {
   color: #000;
   margin-left: 14%;
   width: 65%;
+}
+.main {
+  margin-top: 2%;
+  margin-left: 29%;
+  font-size: 28px;
+  padding: 0 10px;
+  width: 58%;
+  margin-top:10%;
+ 
+}
+
+.main h2 {
+  color: #333;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.main .card {
+  background-color: #fff;
+  border-radius: 18px;
+  box-shadow: 1px 1px 8px 0 grey;
+  height: auto;
+  margin-bottom: 20px;
+  padding: 20px 0 20px 50px;
+  background-image: url('/images/edit.png');
+  background-repeat: no-repeat;
+  background-position: center 10%;
+  background-size:contain;
+}
+
+.main .card table {
+  border: none;
+  font-size: 16px;
+  height: 600px;
+  width: 80%;
+}
+
+.edit {
+  position: absolute;
+  color: #a47206;
+  right: 14%;
+}
+.pencil-img{
+  margin-left:-50%;
+}
+.update-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 50%;
+  height: 100%;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 20px;
+  position: absolute;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.update-title {
+  font-size: 28px;
+  color: royalblue;
+  font-weight: 600;
+  letter-spacing: -1px;
+  display: flex;
+  align-items: center;
+  padding-left: 30px;
+  position: relative;
+}
+
+.update-title::before,
+.update-title::after {
+  content: "";
+  height: 16px;
+  width: 16px;
+  border-radius: 50%;
+  left: 0;
+  background-color: royalblue;
+  position: absolute;
+}
+
+.update-title::before {
+  width: 18px;
+  height: 18px;
+}
+
+.update-title::after {
+  width: 18px;
+  height: 18px;
+  animation: pulse 1s linear infinite;
+}
+
+.update-flex {
+  display: flex;
+  width: 100%;
+  gap: 6px;
+}
+
+.update-form label {
+  position: relative;
+}
+
+.update-form label .update-input {
+  width: 100%;
+  padding: 10px;
+  outline: 0;
+  border: 1px solid rgba(105, 105, 105, 0.397);
+  border-radius: 10px;
+  font-size: 16px;
+  transition: border-color 0.3s ease;
+}
+
+.update-form label .update-input + span {
+  position: absolute;
+  left: 10px;
+  top: 15px;
+  color: grey;
+  font-size: 0.9em;
+  cursor: text;
+  transition: 0.3s ease;
+}
+
+.update-form label .update-input:placeholder-shown + span {
+  top: 15px;
+  font-size: 0.9em;
+}
+
+.update-form label .update-input:focus + span,
+.update-form label .update-input:valid + span {
+  top: 30px;
+  font-size: 0.7em;
+  font-weight: 600;
+}
+
+.update-form label .update-input:valid + span {
+  color: green;
+}
+
+.update-submit {
+  border: none;
+  outline: none;
+  background-color: royalblue;
+  padding: 10px;
+  border-radius: 10px;
+  color: #fff;
+  font-size: 16px;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  cursor: pointer;
+}
+
+.update-submit:hover {
+  background-color: rgb(56, 90, 194);
+  transform: scale(1.05);
+}
+
+@keyframes pulse {
+  from {
+    transform: scale(0.9);
+    opacity: 1;
+  }
+  to {
+    transform: scale(1.8);
+    opacity: 0;
+  }
 }
