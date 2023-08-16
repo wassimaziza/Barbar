@@ -52,8 +52,8 @@ const LoginBarber = () => {
   };
 
   const handleLogout = () => {
-    setIsLoggedIn(false); // Set to false to indicate logout
-    setToken("");
+    setIsLoggedIn(false)
+    setToken("")
   }
 
   return (
