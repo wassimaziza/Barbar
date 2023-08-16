@@ -1,16 +1,76 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 
-function Profile() {
+function Profile({ token, handleLogout }) {
   const [showForm, setShowForm] = useState(false);
+  const [formData, setFormData] = useState({
+    firstname: "",
+    lastname: "",
+    email: "",
+    phone_number: "",
+    address: "",
+  });
+
+  const clientId = "your-client-id"; // Replace with the actual client ID
 
   const toggleForm = () => {
     setShowForm((prevShowForm) => !prevShowForm);
   };
 
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    setFormData((prevData) => ({ ...prevData, [name]: value }));
+  };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    try {
+      const response = await axios.put(
+        `http://localhost:3000/client/${clientId}`,
+        formData
+      );
+      console.log(response.data);
+      // Update UI or show success message
+    } catch (error) {
+      console.error("Error updating profile", error);
+    }
+  };
+
+  useEffect(() => {
+    const fetchClientInfo = async () => {
+      try {
+        const response = await axios.get(
+          `http://localhost:3000/client/updateProfile/${clientId}`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        const { firstname, lastname, email, phone_number, location } =
+          response.data;
+        setFormData({
+          firstname,
+          lastname,
+          email,
+          phone_number,
+          address: location,
+        });
+      } catch (error) {
+        console.error("Error fetching client info", error);
+      }
+    };
+
+    fetchClientInfo();
+  }, [token]);
+
   return (
     <div className="profile-client">
       <div className="sidenav">
         <div className="profile">
+          <div className="profile-image">
+            <img src="/images/profile-image.png" alt="Profile" />
+          </div>
           <div className="name">Client name</div>
         </div>
         <div className="sidenav-url">
@@ -36,13 +96,17 @@ function Profile() {
                   <tbody>
                     <tr>
                       <td>Name :</td>
-                    </tr>+
+                      <td>
+                        {formData.firstname} {formData.lastname}
+                      </td>
+                    </tr>
                     <tr>
                       <td>Email :</td>
-                      <td></td>
+                      <td>{formData.email}</td>
                     </tr>
                     <tr>
                       <td>Address :</td>
+                      <td>{formData.address}</td>
                     </tr>
                   </tbody>
                 </table>
@@ -52,44 +116,83 @@ function Profile() {
         ) : (
           <div className="">
             <div className="popup-content">
-            <form class="form">
-    
-    <div class="flex">
-        <label>
-            <input required="" placeholder="" type="text" class="input"/>
-            <span>first name</span>
-        </label>
+              <form className="form" onSubmit={handleSubmit}>
+                <div className="flex">
+                  <label>
+                    <input
+                      required
+                      placeholder=""
+                      type="text"
+                      className="input"
+                      name="firstname"
+                      value={formData.firstname}
+                      onChange={handleInputChange}
+                    />
+                    <span>first name</span>
+                  </label>
 
-        <label>
-            <input required="" placeholder="" type="text" class="input"/>
-            <span>last name</span>
-        </label>
-    </div>  
-            
-    <label>
-        <input required="" placeholder="" type="email" class="input"/>
-        <span>email</span>
-    </label> 
-        
-    <label>
-        <input required="" type="tel" placeholder="" class="input"/>
-        <span>contact number</span>
-    </label>
-    <label>
-        <textarea required="" rows="3" placeholder="" class="input01"></textarea>
-        <span>message</span>
-    </label>
-    
-    <button class="fancy" href="#">
-      <span class="top-key"></span>
-      <span class="text">submit</span>
-      <span class="bottom-key-1"></span>
-      <span class="bottom-key-2"></span>
-    </button>
-</form>
+                  <label>
+                    <input
+                      required
+                      placeholder=""
+                      type="text"
+                      className="input"
+                      name="lastname"
+                      value={formData.lastname}
+                      onChange={handleInputChange}
+                    />
+                    <span>last name</span>
+                  </label>
+                </div>
+
+                <label>
+                  <input
+                    required
+                    placeholder=""
+                    type="email"
+                    className="input"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleInputChange}
+                  />
+                  <span>email</span>
+                </label>
+
+                <label>
+                  <input
+                    required
+                    type="tel"
+                    placeholder=""
+                    className="input"
+                    name="phone_number"
+                    value={formData.phone_number}
+                    onChange={handleInputChange}
+                  />
+                  <span>contact number</span>
+                </label>
+                <label>
+                  <textarea
+                    required
+                    rows="3"
+                    placeholder=""
+                    className="input01"
+                    name="address"
+                    value={formData.address}
+                    onChange={handleInputChange}
+                  ></textarea>
+                  <span>Address</span>
+                </label>
+
+                <button className="fancy" type="submit">
+                  <span className="text">Update</span>
+                </button>
+              </form>
             </div>
           </div>
         )}
+        <button className="logout-button" onClick={handleLogout}>
+          Logout
+        </button>
       </div>
     </div>
   );
