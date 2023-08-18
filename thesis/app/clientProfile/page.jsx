@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
-function Profile({ token, handleLogout }) {
+function Profile({ token,idClient, handleLogout }) {
+  console.log('hi',idClient);
   const [showForm, setShowForm] = useState(false);
   const [formData, setFormData] = useState({
     firstname: "",
@@ -11,7 +12,6 @@ function Profile({ token, handleLogout }) {
     address: "",
   });
 
-  const clientId = "your-client-id"; // Replace with the actual client ID
 
   const toggleForm = () => {
     setShowForm((prevShowForm) => !prevShowForm);
@@ -26,11 +26,10 @@ function Profile({ token, handleLogout }) {
     event.preventDefault();
     try {
       const response = await axios.put(
-        `http://localhost:3000/client/${clientId}`,
+        `http://localhost:3000/client/${idClient}`,
         formData
       );
       console.log(response.data);
-      // Update UI or show success message
     } catch (error) {
       console.error("Error updating profile", error);
     }
@@ -40,7 +39,7 @@ function Profile({ token, handleLogout }) {
     const fetchClientInfo = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:3000/client/updateProfile/${clientId}`,
+          `http://localhost:3000/client/updateProfile/${idClient}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,

@@ -1,14 +1,16 @@
 "use client"
 import React, { useState } from 'react'
 import axios from 'axios'
-import ClientProfile from '../clientProfile/page' 
+import ClientProfile from '../clientProfile/page'
+import jwt from "jsonwebtoken"
+
 
 
 const LoginClient = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false)
   const [showSignUpForm, setShowSignUpForm] = useState(true)
   const [token, setToken] = useState('')
-
+  const [clientId,setClientId]=useState({}) 
   const toggleForm = () => {
     setShowSignUpForm((prevValue) => !prevValue)
   }
@@ -17,6 +19,8 @@ const LoginClient = () => {
     try {
       const response = await axios.post('http://localhost:3000/client/login', formData)
       console.log('Login Successful', response.data)
+      let id=jwt.decode(response.data);
+      setClientId(id.idclient)
       setIsLoggedIn(true)
       setToken(response.data.token)
       sessionStorage.setItem('clientToken', response.data.token)
@@ -70,7 +74,7 @@ const LoginClient = () => {
   const storedToken = sessionStorage.getItem('clientToken')
 
   if (isLoggedIn || storedToken) {
-    return <ClientProfile token={token || storedToken} handleLogout={handleLogout} />
+    return <ClientProfile token={token || storedToken} idClient={clientId} handleLogout={handleLogout} />
   }
   return (
     <div className="login-client">

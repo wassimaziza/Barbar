@@ -2625,3 +2625,12 @@ label.valid {
     opacity: 0;
   }
 }
+
+
+/* -------------------------- *
+ barberProfile
+/---------------------------------*/
+
+.barberProfile {
+  margin-top:10%;
+}

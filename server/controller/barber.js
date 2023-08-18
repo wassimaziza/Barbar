@@ -69,7 +69,7 @@ module.exports = {
       }
 
       //! Create BarberShop for specific barber
-      const shop = await db.BarberShop.create({
+      const shop = await db.barber.create({
         shop_name,
         shop_logo,
         diploma,
@@ -101,20 +101,12 @@ module.exports = {
       if (!barber) {
         return res.status(404).json({ error: 'Barber not found' })
       }
-
+      barber.shop_name = shop_name
+      barber.shop_logo = shop_logo
       barber.firstname = firstname
       barber.lastname = lastname
       barber.profile_pic = profile_pic
       await barber.save()
-
-      //!  Update barber shop info
-      // const shop = await db.BarberShop.findOne({ where: { BarberId: barber.idbarber } })
-      // if (shop) {
-      //   shop.shop_name = shop_name
-      //   shop.shop_logo = shop_logo
-      //   await shop.save()
-      // }
-
       res.status(200).json({ message: 'Barber info updated successfully' })
     } catch (err) {
       console.log(err)

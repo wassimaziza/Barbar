@@ -14,7 +14,7 @@ module.exports = {
       const token = jwt.sign({ idclient: client.idclient }, jwtConfig.secretKey, {
         expiresIn: jwtConfig.expiresIn,
       })
-      res.status(200).json({ token })
+      res.status(200).json( token )
     } catch (err) {
       console.log(err)
       res.status(500).json({ error: "Internal server error" })
