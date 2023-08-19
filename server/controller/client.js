@@ -10,7 +10,6 @@ module.exports = {
       if (!client || client.password !== password) {
         return res.status(401).json({ error: "Invalid credentials" })
       }
-
       const token = jwt.sign({ idclient: client.idclient }, jwtConfig.secretKey, {
         expiresIn: jwtConfig.expiresIn,
       })
@@ -18,6 +17,24 @@ module.exports = {
     } catch (err) {
       console.log(err)
       res.status(500).json({ error: "Internal server error" })
+    }
+  },
+
+
+  getOneUser:async (req,res)=> {
+    try {
+      const clientId = req.params.idclient
+      const clientProfile = await db.client.findOne({
+        where: { idclient: clientId },
+        attributes: ['idclient', 'firstname', 'lastname', 'email', 'profile_pic'],
+      })
+      if (!clientProfile) {
+        return res.status(404).json({ error: 'Client profile not found' });
+      }
+      res.status(200).json(clientProfile)
+    }catch (err){
+      console.log(err)
+      res.status(500).json(err)
     }
   },
 

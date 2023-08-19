@@ -22,8 +22,10 @@ const LoginClient = () => {
       let id=jwt.decode(response.data);
       setClientId(id.idclient)
       setIsLoggedIn(true)
-      setToken(response.data.token)
-      sessionStorage.setItem('clientToken', response.data.token)
+      setToken(response.data)
+      sessionStorage.setItem('clientToken', response.data)
+      sessionStorage.setItem("idClient",id.idclient)
+
     } catch (error) {
       console.error('Cannot login, please try again', error)
     }
@@ -34,8 +36,9 @@ const LoginClient = () => {
       const response = await axios.post('http://localhost:3000/client/signup', formData)
       console.log('Sign Up Successful', response.data)
       setIsLoggedIn(true)
-      setToken(response.data.token)
-      sessionStorage.setItem('clientToken', response.data.token)
+      setToken(response.data)
+      sessionStorage.setItem('clientToken', response.data)
+      sessionStorage.setItem("idClient")
     } catch (error) {
       console.error('Check your sign up, an error has occurred', error)
     }

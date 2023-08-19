@@ -1,0 +1,11 @@
+.shop-card {
+  display: grid;
+  grid-template-columns: repeat(4, 2fr);
+  grid-template-rows: 2fr;
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+}
+body{
+  background-image:url('/images/pricing-bg.jpg');
+  
+}

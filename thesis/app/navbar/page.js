@@ -1,8 +1,20 @@
 "use client"
-import React from 'react';
+import React,{useState} from 'react';
 import Link from 'next/link'
 
 const NavBar = () => {
+  const [color,setColor]=useState(false)
+  const onScroll=()=>{
+    if(window.scrollY(0))
+    {
+      setColor(true);
+      
+    }
+    else{
+      setColor(false)
+    } 
+    window.addEventListener("scroll",onScroll)
+  }
   return (
     <header className="header">
       <div className="header-bottom" data-header>
@@ -11,7 +23,7 @@ const NavBar = () => {
             BarBar
             <span className="span">barbers booking app</span>
           </a>
-          <nav className="navbar container" data-navbar>
+          <nav className={color? "navbar container active":"navbar container"} data-navbar>
       <ul className="navbar-list">
         <li className="navbar-item">
             <Link href="/" className="navbar-link" data-nav-link>Home</Link>

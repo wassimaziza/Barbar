@@ -1,8 +1,9 @@
+"use client"
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import "./styles.css"
 
-function Profile({ token,idClient, handleLogout }) {
-  console.log('hi',idClient);
+function Profile({ token, idClient, handleLogout }) {
   const [showForm, setShowForm] = useState(false);
   const [formData, setFormData] = useState({
     firstname: "",
@@ -11,7 +12,6 @@ function Profile({ token,idClient, handleLogout }) {
     phone_number: "",
     address: "",
   });
-
 
   const toggleForm = () => {
     setShowForm((prevShowForm) => !prevShowForm);
@@ -26,7 +26,7 @@ function Profile({ token,idClient, handleLogout }) {
     event.preventDefault();
     try {
       const response = await axios.put(
-        `http://localhost:3000/client/${idClient}`,
+        `http://localhost:3000/client/updateProfile/${sessionStorage.getItem("idClient")}`,
         formData
       );
       console.log(response.data);
@@ -39,15 +39,14 @@ function Profile({ token,idClient, handleLogout }) {
     const fetchClientInfo = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:3000/client/updateProfile/${idClient}`,
+          `http://localhost:3000/client/getOneUser/${sessionStorage.getItem("idClient")}`,
           {
             headers: {
-              Authorization: `Bearer ${token}`,
+              "Authorization": `${sessionStorage.getItem("clientToken")}`,
             },
           }
         );
-        const { firstname, lastname, email, phone_number, location } =
-          response.data;
+        const { firstname, lastname, email, phone_number, location } = response.data;
         setFormData({
           firstname,
           lastname,
@@ -68,9 +67,9 @@ function Profile({ token,idClient, handleLogout }) {
       <div className="sidenav">
         <div className="profile">
           <div className="profile-image">
-            <img src="/images/profile-image.png" alt="Profile" />
+            <img src={formData.profile_pic} alt="Profile" />
           </div>
-          <div className="name">Client name</div>
+          <div className="name">@{formData.firstname}</div>
         </div>
         <div className="sidenav-url">
           <div className="url">
@@ -86,7 +85,6 @@ function Profile({ token,idClient, handleLogout }) {
         </div>
       </div>
       <div className="main">
-        {!showForm ? (
           <div>
             <h2>Your Infos</h2>
             <div className="card">
@@ -96,7 +94,7 @@ function Profile({ token,idClient, handleLogout }) {
                     <tr>
                       <td>Name :</td>
                       <td>
-                        {formData.firstname} {formData.lastname}
+                        {formData.firstname} {formData.lastname}.
                       </td>
                     </tr>
                     <tr>
@@ -112,86 +110,12 @@ function Profile({ token,idClient, handleLogout }) {
               </div>
             </div>
           </div>
-        ) : (
-          <div className="">
-            <div className="popup-content">
-              <form className="form" onSubmit={handleSubmit}>
-                <div className="flex">
-                  <label>
-                    <input
-                      required
-                      placeholder=""
-                      type="text"
-                      className="input"
-                      name="firstname"
-                      value={formData.firstname}
-                      onChange={handleInputChange}
-                    />
-                    <span>first name</span>
-                  </label>
-
-                  <label>
-                    <input
-                      required
-                      placeholder=""
-                      type="text"
-                      className="input"
-                      name="lastname"
-                      value={formData.lastname}
-                      onChange={handleInputChange}
-                    />
-                    <span>last name</span>
-                  </label>
-                </div>
-
-                <label>
-                  <input
-                    required
-                    placeholder=""
-                    type="email"
-                    className="input"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleInputChange}
-                  />
-                  <span>email</span>
-                </label>
-
-                <label>
-                  <input
-                    required
-                    type="tel"
-                    placeholder=""
-                    className="input"
-                    name="phone_number"
-                    value={formData.phone_number}
-                    onChange={handleInputChange}
-                  />
-                  <span>contact number</span>
-                </label>
-                <label>
-                  <textarea
-                    required
-                    rows="3"
-                    placeholder=""
-                    className="input01"
-                    name="address"
-                    value={formData.address}
-                    onChange={handleInputChange}
-                  ></textarea>
-                  <span>Address</span>
-                </label>
-
-                <button className="fancy" type="submit">
-                  <span className="text">Update</span>
-                </button>
-              </form>
-            </div>
-          </div>
-        )}
-        <button className="logout-button" onClick={handleLogout}>
-          Logout
-        </button>
+          <button className="logout-button" onClick={handleLogout} >
+    Sign up
+    <div class="arrow-wrapper">
+        <div class="arrow"></div>
+    </div>
+</button>
       </div>
     </div>
   );
