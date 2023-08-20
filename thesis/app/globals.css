@@ -2696,13 +2696,13 @@ label.valid {
 }
 
 .lists {
-  margin-bottom: 1.5rem;
+  margin-bottom:10%;
   flex: 1 1 0%;
   color: white;
 }
 
 .lists .list {
-  margin-bottom: 0.5rem;
+  margin-bottom: 2%;
   display: flex;
   margin-left: 0.5rem
 }

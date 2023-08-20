@@ -26,7 +26,7 @@ const NavBar = () => {
           <nav className={color? "navbar container active":"navbar container"} data-navbar>
       <ul className="navbar-list">
         <li className="navbar-item">
-            <Link href="/" className="navbar-link" data-nav-link>Home</Link>
+            <Link href="/home" className="navbar-link" data-nav-link>Home</Link>
         </li>
         <li className="navbar-item">
             <Link href="/services" className="navbar-link" data-nav-link>Services</Link>
@@ -48,7 +48,7 @@ const NavBar = () => {
           <button className="nav-toggle-btn" aria-label="toggle menu" data-nav-toggler>
             <ion-icon name="menu-outline" aria-hidden="true"></ion-icon>
           </button>
-          <Link href="/loginClient" className="btn has-before">
+          <Link href="/clientLogic" className="btn has-before">
             <span className="span"> Join Us </span>
             <ion-icon name="arrow-forward" aria-hidden="true"></ion-icon>
           </Link>
