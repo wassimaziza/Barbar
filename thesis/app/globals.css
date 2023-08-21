@@ -2860,3 +2860,63 @@ body {
     text-align: center;
   }
 }
+
+
+  .payment-page {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    margin: 0 auto;
+    text-align: center;
+    margin-top: 20%;
+  }
+  
+  .payment-page h2 {
+    color: indianorange;
+    margin-bottom: 20px;
+  }
+  
+  .payment-page form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .payment-page input {
+    padding: 10px;
+    margin: 5px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 100%;
+  }
+  
+  .payment-page input[type="number"] {
+    appearance: textfield;
+    -moz-appearance: textfield;
+    width: calc(100% - 20px);
+  }
+  
+  .payment-page input[type="text"] {
+    width: calc(100% - 20px);
+  }
+  
+  .payment-page button {
+    background-color: indianorange;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .payment-page button:hover {
+    background-color: #ff924e;
+  }
+  
+
+  .user-image {
+  margin-left: 50%;
+ }

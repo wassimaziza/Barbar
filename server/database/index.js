@@ -13,7 +13,7 @@ db.rating = require("../database/model/rating")(sequelize, DataTypes)
 db.Admin = require("../database/model/admin")(sequelize, DataTypes)
 db.work = require("../database/model/work")(sequelize, DataTypes)
 db.booking = require("../database/model/booking")(sequelize, DataTypes)
-
+db.payment = require("../database/model/payment")(sequelize, DataTypes)
 //! Relations
 db.client.hasMany(db.booking, { foreignKey: "client_idclient" })
 db.client.hasMany(db.rating, { foreignKey: "client_idclient" })

@@ -9,8 +9,8 @@ import ClientSignup from '../clientSignup/page'
 const LoginLogic = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false)
   const [token, setToken] = useState('')
-  const [clientId, setClientId] = useState({})
-  const [showSignUpForm, setShowSignUpForm] = useState(false) 
+  const [clientId, setClientId] = useState('')
+  const [showSignUpForm, setShowSignUpForm] = useState(false)
   const router = useRouter()
 
   const handleLogin = async (formData) => {
@@ -19,12 +19,12 @@ const LoginLogic = () => {
 
       if (response.status === 201) {
         console.log('Login Successful', response.data)
-        let id = jwt.decode(response.data)
-        setClientId(id.idclient)
+        const decodedToken = jwt.decode(response.data)
+        setClientId(decodedToken.idclient)
         setIsLoggedIn(true)
         setToken(response.data)
         sessionStorage.setItem('clientToken', response.data)
-        sessionStorage.setItem('idClient', id.idclient)
+        sessionStorage.setItem('idClient', decodedToken.idclient)
         router.push('/clientProfile')
       } else {
         console.error('Login failed')
@@ -38,7 +38,8 @@ const LoginLogic = () => {
     setIsLoggedIn(false)
     setToken('')
     sessionStorage.removeItem('clientToken')
-  }
+    sessionStorage.removeItem('idClient') /
+    router.push('/home')
 
   const storedToken = sessionStorage.getItem('clientToken')
 
@@ -69,46 +70,42 @@ const LoginLogic = () => {
         <div className="container-login">
           <div className="signup-content">
             {showSignUpForm ? (
-              
               <ClientSignup />
             ) : (
               <div className="signin-form">
                 <h2 className="form-title">Sign In</h2>
                 <form onSubmit={handleSubmit} className="register-form" id="login-form">
-                <div className="signin-form">
-                <h2 className="form-title">Sign In</h2>
-                <form onSubmit={handleSubmit} className="register-form" id="login-form">
-                <div className="form-group">
-                  <label htmlFor="your_email">
-                    <i className="zmdi zmdi-account material-icons-name"></i>
-                  </label>
-                  <input
-                    type="email"
-                    name="email"
-                    id="email"
-                    placeholder="Your Email"
-                  />
-                </div>
-                <div className="form-group">
-                  <label htmlFor="password">
-                    <i className="zmdi zmdi-lock"></i>
-                  </label>
-                  <input
-                    type="password"
-                    name="password"
-                    id="password"
-                    placeholder="Password"
-                  />
-                </div>
-                <div className="form-group form-button">
-                  <input
-                    type="submit"
-                    name="signin"
-                    id="signin"
-                    className="form-submit"
-                    value="Log in"
-                  />
-                </div>
+                  <div className="form-group">
+                    <label htmlFor="email">
+                      <i className="zmdi zmdi-account material-icons-name"></i>
+                    </label>
+                    <input
+                      type="email"
+                      name="email"
+                      id="email"
+                      placeholder="Your Email"
+                    />
+                  </div>
+                  <div className="form-group">
+                    <label htmlFor="password">
+                      <i className="zmdi zmdi-lock"></i>
+                    </label>
+                    <input
+                      type="password"
+                      name="password"
+                      id="password"
+                      placeholder="Password"
+                    />
+                  </div>
+                  <div className="form-group form-button">
+                    <input
+                      type="submit"
+                      name="signin"
+                      id="signin"
+                      className="form-submit"
+                      value="Log in"
+                    />
+                  </div>
                 </form>
                 <a href="#" className="signup-image-link" onClick={toggleForm}>
                   Create an account
@@ -120,6 +117,7 @@ const LoginLogic = () => {
       </section>
     </div>
   )
+}
 }
 
 export default LoginLogic

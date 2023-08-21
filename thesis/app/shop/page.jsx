@@ -1,8 +1,13 @@
 "use client"
 import React from 'react'
 import "./styles.css"
+import { useRouter } from 'next/navigation'
 
 function Shop() {
+	const router = useRouter()
+	
+	const handleBookNowClick = () => {
+		router.push('/booking'); }
   return (
     <div className='shop-div'>
      <div class="card">
@@ -35,7 +40,7 @@ function Shop() {
 							<span>Basic bread treatment.</span>
 						</li>
 					</ul>
-					<button type="button" class="action">
+					<button type="button" class="action" onClick={handleBookNowClick}>
             <span>book it now!</span>
             </button>
 				</div>
@@ -68,7 +73,7 @@ function Shop() {
 							<span>a precise neck shave</span>
 						</li>
 					</ul>
-					<button type="button" class="action">book it now!</button>
+					<button type="button" class="action" onClick={handleBookNowClick}>book it now!</button>
 				</div>
         <div class="card">
 <div class="header">
@@ -99,7 +104,7 @@ function Shop() {
 							<span>rejuvenating scalp massage / a tailored facial mask,</span>
 						</li>
 					</ul>
-					<button type="button" class="action">book it now!</button>
+					<button type="button" class="action" onClick={handleBookNowClick}>book it now!</button>
 				</div>
         <div class="card">
 <div class="header">
@@ -130,7 +135,7 @@ function Shop() {
 							<span>a deluxe haircut, a therapeutic scalp treatment</span>
 						</li>
 					</ul>
-					<button type="button" class="action">book it now!</button>
+					<button type="button" class="action" onClick={handleBookNowClick}>book it now!</button>
 				</div>
         
     </div>

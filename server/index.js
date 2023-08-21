@@ -9,7 +9,7 @@ const Client=require("./router/client")
 const booking =require("./router/booking")
 const Admin = require("./router/admin")
 const barber = require("./router/barber")
-
+const payment = require("./router/payment")
 
 
 
@@ -24,6 +24,7 @@ app.use("/client",Client)
 app.use("/booking",booking )
 app.use("/admin",Admin)
 app.use("/barber",barber)
+app.use("/payment",payment)
   
 
 

@@ -1,170 +1,103 @@
-@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@1&family=Oswald:wght@200&family=Sree+Krushnadevaraya&display=swap');
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-  
-  
- 
-  
-  .custom_about_container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
-    margin-top:3.5%;
-    
-  }
-  
-  .custom_about_area {
-    background-color: #f7f7f7;
-    padding: 80px 0;
-    background-image: url("/images/hair-home.jpg");
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: cover;
-  }
-  
-  .custom_about_thumb img {
-    max-width: 100%;
-    height: auto;
-  }
-  
-  .custom_opening_hour {
-    margin-top: 20px;
-  }
-  
-  .custom_opening_hour i {
-    color: #3498db;
-    font-size: 30px;
-    font-family: 'DM Serif Display', serif;
-  }
-  
-  .custom_opening_hour h3 {
-    font-size: 18px;
-    margin-top: 10px;
-    color:white;
-    font-family: 'DM Serif Display', serif;  
+/* styles.css */
+
+.custom_about_area {
+  padding: 100px 0;
+  background-color: transparent;
+  margin-top:10%;
 }
-  
-  .custom_opening_hour p {
-    font-size: 14px;
-    color: #ffffff;
-    font-family: 'DM Serif Display', serif;
-  }
-  
-  .custom_about_info {
-    padding-left: 40px;
-  }
-  
-  .custom_section_title span {
-    color: #3498db;
-    font-size: 16px;
-    font-family: 'DM Serif Display', serif;
-  }
-  
-  .custom_section_title h3 {
-    font-size: 36px;
-    color: #fff7f7;
-    margin-top: 10px;
-    font-family: 'DM Serif Display', serif;
-  }
-  
-  .custom_about_info p {
-    font-size: 16px;
-    color: #fffefe;
-    margin-top: 20px;
-    font-family: 'DM Serif Display', serif;
-  }
-  
-  .custom_boxed_btn3 {
-    display: inline-block;
-    margin-top: 20px;
-    padding: 10px 20px;
-    background-color: #3498db;
-    color: #fff;
-    text-decoration: none;
-    border-radius: 5px;
-    transition: background-color 0.3s, transform 0.2s;
-  }
-  
-  .custom_boxed_btn3:hover {
-    background-color: #2980b9;
-    transform: scale(1.05);
-  }
-  
 
-  @media (max-width: 768px) {
-    .custom_about_thumb {
-      text-align: center;
-    }
-    
-    .custom_about_thumb img {
-      margin-bottom: 20px;
-    }
-    
-    .custom_about_info {
-      padding: 0;
-      text-align: center;
-    }
-  }
+.custom_about_container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
 
-  .clock {
-    width: 200px;
-    height: 200px;
-    border-radius: 50%;
-    background-color: #f1f1f1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-    animation: bounce 1s infinite alternate;
-  }
-  
-  .clock-face {
-    width: 80%;
-    height: 80%;
-    background-color: #fff;
-    border-radius: 50%;
-    position: relative;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  }
-  
-  .hand {
-    position: absolute;
-    width: 4px;
-    background-color: #333;
-    transform-origin: bottom center;
-    transition: transform 0.5s cubic-bezier(0.42, 0, 0.58, 1);
-    top: 50%;
-    left: 50%;
-  }
-  
-  .hour-hand {
-    height: 35%;
-    transform: translate(-50%, -100%) rotate(240deg);
-  }
-  
-  .minute-hand {
-    height: 45%;
-    transform: translate(-50%, -100%) rotate(288deg);
-  }
-  
-  .second-hand {
-    width: 1px;
-    height: 50%;
-    background-color: #d63031;
-    transform-origin: bottom center;
-    transition: transform 0.5s cubic-bezier(0.42, 0, 0.58, 1), background-color 0.3s;
-    transform: translate(-50%, -100%) rotate(180deg);
-  }
-  
-  /* @keyframes bounce {
-    0%, 100% {
-      transform: translateY(0);
-    }
-    50% {
-      transform: translateY(-10px);
-    }
-  } */
-  
+.custom_about_thumb {
+  position: relative;
+  overflow: hidden;
+  border-radius: 10px;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+  background-color: transparent;
+}
+
+.custom_about_thumb img {
+  max-width: 100%;
+  height: auto;
+  display: contain;
+  margin-left:22%;
+  border-radius: 10%;
+}
+
+.custom_about_thumb button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  color: #edaf12;
+  font-size: 24px;
+  transition: color 0.3s ease;
+  z-index: 2;
+}
+
+.custom_about_thumb button:hover {
+  color: #ff7b54;
+}
+
+.custom_about_thumb button:nth-child(1) {
+  left: 20px;
+}
+
+.custom_about_thumb button:nth-child(2) {
+  right: 20px;
+}
+
+.custom_about_info {
+  padding-left: 40px;
+}
+
+.custom_section_title {
+  position: relative;
+}
+
+.custom_section_title span {
+  font-size: 18px;
+  font-weight: 600;
+  color: #ff7b54;
+  text-transform: uppercase;
+}
+
+.custom_section_title h3 {
+  margin-top: 15px;
+  font-size: 36px;
+  font-weight: 700;
+  line-height: 1.2;
+  color: #ffffff;
+}
+
+.custom_about_info p {
+  margin-top: 20px;
+  font-size: 16px;
+  color: #ffffff;
+  line-height: 1.6;
+}
+
+.custom_boxed_btn3 {
+  display: inline-block;
+  margin-top: 30px;
+  padding: 15px 25px;
+  background-color: #ff7b54;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  border: none;
+  border-radius: 5px;
+  text-transform: uppercase;
+  transition: background-color 0.3s ease;
+  text-decoration: none;
+}
+
+.custom_boxed_btn3:hover {
+  background-color: #e6643e;
+}

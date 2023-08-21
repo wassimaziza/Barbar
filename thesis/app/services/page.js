@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 
 const ServicesSection = () => {
   return (
@@ -107,26 +107,11 @@ const ServicesSection = () => {
             </div>
           </li>
           
-          <li>
-            <div className="service-card">
-              <div className="card-icon">
-                <i className="flaticon-new-service-icon"></i> 
-              </div>
-              <h3 className="h3">
-                <a href="#" className="card-title">New Service Title</a> 
-              </h3>
-              <p className="card-text">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. {/* Add new description */}
-              </p>
-              <a href="#" className="card-btn" aria-label="more">
-                <ion-icon name="arrow-forward" aria-hidden="true"></ion-icon>
-              </a>
-            </div>
-          </li>
+          
         </ul>
       </div>
     </section>
-  );
-};
+  )
+}
 
-export default ServicesSection;
+export default ServicesSection

@@ -1,39 +1,46 @@
 "use client"
-import React, { useState, useEffect } from "react";
-import axios from "axios";
+import React, { useState, useEffect } from "react"
+import axios from "axios"
 import "./styles.css"
 
 function Profile({ token, idClient, handleLogout }) {
-  const [showForm, setShowForm] = useState(false);
+  const [showForm, setShowForm] = useState(false)
   const [formData, setFormData] = useState({
     firstname: "",
     lastname: "",
     email: "",
     phone_number: "",
     address: "",
-  });
+  })
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('success')) {
+      alert("Congratulations! Your payment is successful. You can check your points.");
+    }
+  }, [])
 
   const toggleForm = () => {
-    setShowForm((prevShowForm) => !prevShowForm);
-  };
+    setShowForm((prevShowForm) => !prevShowForm)
+  }
 
   const handleInputChange = (event) => {
-    const { name, value } = event.target;
-    setFormData((prevData) => ({ ...prevData, [name]: value }));
-  };
+    const { name, value } = event.target
+    setFormData((prevData) => ({ ...prevData, [name]: value }))
+  }
 
   const handleSubmit = async (event) => {
-    event.preventDefault();
+    event.preventDefault()
     try {
       const response = await axios.put(
         `http://localhost:3000/client/updateProfile/${sessionStorage.getItem("idClient")}`,
         formData
-      );
-      console.log(response.data);
+      )
+      console.log(response.data)
     } catch (error) {
-      console.error("Error updating profile", error);
+      console.error("Error updating profile", error)
     }
-  };
+  }
 
   useEffect(() => {
     const fetchClientInfo = async () => {
@@ -45,80 +52,55 @@ function Profile({ token, idClient, handleLogout }) {
               "Authorization": `${sessionStorage.getItem("clientToken")}`,
             },
           }
-        );
-        const { firstname, lastname, email, phone_number, location } = response.data;
+        )
+        const { firstname, lastname, email, phone_number, location } = response.data
         setFormData({
           firstname,
           lastname,
           email,
           phone_number,
           address: location,
-        });
+        })
       } catch (error) {
-        console.error("Error fetching client info", error);
+        console.error("Error fetching client info", error)
       }
-    };
+    }
 
-    fetchClientInfo();
-  }, [token]);
+    fetchClientInfo()
+  }, [token])
 
   return (
-    <div className="profile-client">
-      <div className="sidenav">
-        <div className="profile">
-          <div className="profile-image">
-            <img src={formData.profile_pic} alt="Profile" />
-          </div>
-          <div className="name">@{formData.firstname}</div>
-        </div>
-        <div className="sidenav-url">
-          <div className="url">
-            <a href="#profile" className="active">
-              Profile
-            </a>
-            <hr align="center" />
-          </div>
-          <div className="url">
-            <a onClick={toggleForm}>Settings</a>
-            <hr align="center" />
-          </div>
-        </div>
-      </div>
       <div className="main">
-          <div>
-            <h2>Your Infos</h2>
-            <div className="card">
-              <div className="card-body">
-                <table>
-                  <tbody>
-                    <tr>
-                      <td>Name :</td>
-                      <td>
-                        {formData.firstname} {formData.lastname}.
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>Email :</td>
-                      <td>{formData.email}</td>
-                    </tr>
-                    <tr>
-                      <td>Address :</td>
-                      <td>{formData.address}</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
+        <div className="card-container">
+          
+          {/* <img className="round" src={formData.profile_pic} alt="user" /> */}
+          <center> <img  className="user-image" src="https://static.vecteezy.com/system/resources/previews/000/439/863/original/vector-users-icon.jpg" width="100"/></center>
+          <h3>{formData.firstname} {formData.lastname}</h3>
+          <h6>{formData.address}</h6>
+          <div className="skills">
+            <h6>Barbers liked</h6>
+            <ul>
+              <li>Ala</li>
+            </ul>
           </div>
-          <button className="logout-button" onClick={handleLogout} >
-    Sign up
-    <div class="arrow-wrapper">
-        <div class="arrow"></div>
-    </div>
-</button>
+          <div className="bookings">
+            <h6>Bookings</h6>
+            <ul>
+              <li>
+              <h6>time :   <br/>
+              day :        </h6>
+              </li>
+            </ul>
+          </div>
+        </div>
+        
+        <button class="full-rounded">
+<span>  logout  </span>
+<div class="border full-rounded"></div></button>
       </div>
-    </div>
+    
   );
 }
+  
 
-export default Profile;
+export default Profile

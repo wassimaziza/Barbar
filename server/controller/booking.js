@@ -6,7 +6,7 @@ module.exports = {
   addBooking: async (req, res) => {
     const { date, time, barber_id } = req.body;
     try {
-      const token = req.headers.authorization;
+      const token = req.headers.authorization
       if (!token) {
         return res.status(401).json("You must be logged in to add a booking");
       }
@@ -42,7 +42,7 @@ module.exports = {
     const { id } = req.params;
     const { date, time } = req.body;
     try {
-      const booking = await db.Booking.findByPk(id);
+      const booking = await db.booking.findByPk(id);
       if (!booking) {
         return res.status(404).json("No booking related found");
       }
@@ -59,7 +59,7 @@ module.exports = {
   deleteBooking: async (req, res) => {
     const { id } = req.params;
     try {
-      const booking = await db.Booking.findByPk(id);
+      const booking = await db.booking.findByPk(id);
       if (!booking) {
         return res.status(404).json("Booking not found");
       }
@@ -76,7 +76,7 @@ module.exports = {
     const { id } = req.params;
     const { status } = req.body;
     try {
-      const booking = await db.Booking.findByPk(id);
+      const booking = await db.booking.findByPk(id);
       if (!booking) {
         return res.status(404).json("Booking not found");
       }
@@ -84,7 +84,7 @@ module.exports = {
       await booking.save();
       
       if (status === "accepted") {
-        const client = await db.Client.findByPk(booking.client_id);
+        const client = await db.client.findByPk(booking.client_id);
         if (client) {
           client.loyalty += 1;
           await client.save();
@@ -108,7 +108,7 @@ module.exports = {
       const decodedToken = jwt.verify(token, jwtConfig.secret);
       const client_id = decodedToken.idclient;
 
-      const bookings = await db.Booking.findAll({ where: { client_id } });
+      const bookings = await db.booking.findAll({ where: { client_id } });
 
       res.status(200).json(bookings);
     } catch (err) {

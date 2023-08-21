@@ -5,19 +5,21 @@ import jwt from 'jsonwebtoken'
 import { useRouter } from 'next/navigation'
 import ClientProfile from '../clientProfile/page'
 import ClientSignup from '../clientSignup/page'
+import Booking from '../booking/page'
+import Payment from "../payment/page"
 
 const LoginLogic = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false)
-  const [token, setToken] = useState('')
-  const [clientId, setClientId] = useState({})
-  const [showSignUpForm, setShowSignUpForm] = useState(false)
-  const router = useRouter()
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [token, setToken] = useState('');
+  const [clientId, setClientId] = useState({});
+  const [showSignUpForm, setShowSignUpForm] = useState(false);
+  const router = useRouter();
 
   const handleLogin = async (formData) => {
     try {
       const response = await axios.post('http://localhost:3000/client/login', formData)
-
-      if (response.status === 201) {
+      console.log('message')
+      // if (response.status === 201) {
         console.log('Login Successful', response.data)
         let id = jwt.decode(response.data)
         setClientId(id.idclient)
@@ -26,9 +28,9 @@ const LoginLogic = () => {
         sessionStorage.setItem('clientToken', response.data)
         sessionStorage.setItem('idClient', id.idclient)
         router.push('/clientProfile')
-      } else {
-        console.error('Login failed')
-      }
+      // } else {
+      //   console.error('Login failed')
+      // }
     } catch (error) {
       console.error('Cannot login, please try again', error);
     }
@@ -44,7 +46,11 @@ const LoginLogic = () => {
 
   if (isLoggedIn || storedToken) {
     return (
+      <div>
       <ClientProfile token={token || storedToken} idClient={clientId} handleLogout={handleLogout} />
+      <Booking token={token || storedToken} /> 
+      <Payment  token={token || storedToken} /> 
+      </div>
     );
   }
 

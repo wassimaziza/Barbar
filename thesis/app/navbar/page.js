@@ -43,12 +43,15 @@ const NavBar = () => {
         <li className="navbar-item">
             <Link href="/loginBarber" className="navbar-link" data-nav-link>Start Your Work!</Link>
         </li>
+        <li className="navbar-item">
+            <Link href="/clientLogin" className="navbar-link" data-nav-link>login!</Link>
+        </li>
       </ul>
     </nav>
           <button className="nav-toggle-btn" aria-label="toggle menu" data-nav-toggler>
             <ion-icon name="menu-outline" aria-hidden="true"></ion-icon>
           </button>
-          <Link href="/clientLogic" className="btn has-before">
+          <Link href="/clientLogin" className="btn has-before">
             <span className="span"> Join Us </span>
             <ion-icon name="arrow-forward" aria-hidden="true"></ion-icon>
           </Link>
